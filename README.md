@@ -30,8 +30,10 @@ Sharing keeps running in the background with a notification that has a **Stop** 
 - Uses Android's built-in screen sharing (MediaProjection). No root needed.
 - Works in every browser: the stream is plain MJPEG over HTTP, so there's nothing to install for viewers.
 - Handles screen rotation.
-- No accounts, no cloud, no tracking, no third-party libraries. Nothing leaves your local network.
-- Small: under 1 MB.
+- No accounts, no cloud. Your screen never leaves your local network.
+- Two editions built from the same code:
+  - **FOSS** (F-Droid, GitHub): no ads, no tracking, no third-party libraries, under 1 MB.
+  - **Google Play**: a small banner and a full-screen ad before sharing starts, via Google AdMob. Both can be turned off completely in **Settings**; with ads off, the ad SDK isn't even started.
 
 Requires Android 8.0 (API 26) or newer.
 
@@ -47,6 +49,8 @@ The stream is **not** password-protected or encrypted. Anyone on the same networ
 | Capture service | [`ScreenShareService.kt`](app/src/main/java/com/sharescreenweb/ScreenShareService.kt) | Foreground service: MediaProjection → `ImageReader` → JPEG (about 15 fps, max 1280 px) |
 | Web server | [`MjpegServer.kt`](app/src/main/java/com/sharescreenweb/MjpegServer.kt) | Tiny HTTP server: viewer page at `/`, MJPEG stream at `/stream`, single frame at `/frame.jpg` |
 | Network | [`NetworkUtils.kt`](app/src/main/java/com/sharescreenweb/NetworkUtils.kt) | Finds the device's Wi-Fi or hotspot IPv4 address |
+| Settings | [`SettingsActivity.kt`](app/src/main/java/com/sharescreenweb/SettingsActivity.kt) | "Show ads" switch and ad privacy options (Play edition only) |
+| Ads | [`AdController.kt`](app/src/main/java/com/sharescreenweb/AdController.kt) | Ad interface; [`foss`](app/src/foss/java/com/sharescreenweb/AdsFactory.kt) is a no-op, [`play`](app/src/play/java/com/sharescreenweb/AdsFactory.kt) uses AdMob with GDPR consent (UMP) |
 
 The server listens on port 8080. If that port is taken, it uses the next free port up to 8099.
 
@@ -58,19 +62,21 @@ Requirements: JDK 17 or newer and the Android SDK (platform 36).
 # Point Gradle at your SDK (or set ANDROID_HOME)
 echo "sdk.dir=/path/to/Android/Sdk" > local.properties
 
-./gradlew assembleDebug      # → app/build/outputs/apk/debug/app-debug.apk
-./gradlew assembleRelease    # unsigned release APK
+./gradlew assembleFossDebug    # → app/build/outputs/apk/foss/debug/app-foss-debug.apk (no ads)
+./gradlew assemblePlayDebug    # → app/build/outputs/apk/play/debug/app-play-debug.apk (AdMob test ads)
+./gradlew assembleFossRelease  # FOSS release APK
+./gradlew bundlePlayRelease    # Google Play bundle (.aab)
 ```
 
 Install on a connected device:
 
 ```sh
-adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb install -r app/build/outputs/apk/foss/debug/app-foss-debug.apk
 ```
 
 ## F-Droid
 
-Store metadata (title, descriptions, icon, changelogs) lives in [`fastlane/metadata/android`](fastlane/metadata/android) and is picked up by F-Droid automatically. The build recipe submitted to [fdroiddata](https://gitlab.com/fdroid/fdroiddata) is in [`fdroid/`](fdroid/).
+F-Droid builds the ad-free `foss` flavor. Store metadata (title, descriptions, icon, changelogs) lives in [`fastlane/metadata/android`](fastlane/metadata/android) and is picked up by F-Droid automatically. The build recipe submitted to [fdroiddata](https://gitlab.com/fdroid/fdroiddata) is in [`fdroid/`](fdroid/).
 
 ### Releasing a new version
 

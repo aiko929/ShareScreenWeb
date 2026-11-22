@@ -12,6 +12,17 @@ val keystoreProps = Properties().apply {
     if (f.exists()) f.inputStream().use { load(it) }
 }
 
+// AdMob IDs for the "play" flavor. Put your real IDs in admob.properties (keys: appId, bannerId,
+// interstitialId). Without that file, Google's official test IDs are used. Debug builds always
+// use test ad units (see AdIds.kt).
+val admobProps = Properties().apply {
+    val f = rootProject.file("admob.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+val admobAppId = admobProps.getProperty("appId", "ca-app-pub-3940256099942544~3347511713")
+val admobBannerId = admobProps.getProperty("bannerId", "ca-app-pub-3940256099942544/9214589741")
+val admobInterstitialId = admobProps.getProperty("interstitialId", "ca-app-pub-3940256099942544/1033173712")
+
 android {
     namespace = "com.sharescreenweb"
     compileSdk = 36
@@ -22,6 +33,24 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    // foss: no ads, no proprietary code (F-Droid, GitHub). play: optional AdMob ads (Google Play).
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("foss") {
+            dimension = "distribution"
+        }
+        create("play") {
+            dimension = "distribution"
+            manifestPlaceholders["admobAppId"] = admobAppId
+            buildConfigField("String", "ADMOB_BANNER_ID", "\"$admobBannerId\"")
+            buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"$admobInterstitialId\"")
+        }
     }
 
     signingConfigs {
@@ -59,4 +88,9 @@ kotlin {
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
+}
+
+dependencies {
+    "playImplementation"("com.google.android.gms:play-services-ads:24.4.0")
+    "playImplementation"("com.google.android.ump:user-messaging-platform:3.2.0")
 }

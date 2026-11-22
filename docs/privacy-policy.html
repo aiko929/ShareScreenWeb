@@ -19,10 +19,15 @@
 <body>
 <main>
 <h1>Privacy Policy</h1>
-<p class="dim">ScreenShare Web (app ID <code>io.github.aiko929.sharescreenweb</code>) · Last updated: 22 November 2026</p>
+<p class="dim">ScreenShare Web (app ID <code>io.github.aiko929.sharescreenweb</code>) · Last updated: 22 November 2026 (added ads in the Google Play edition)</p>
 
 <h2>Summary</h2>
-<p>ScreenShare Web does not collect, store or send any personal data to the developer or to any third party. There are no accounts, no analytics, no ads and no tracking.</p>
+<p>ScreenShare Web comes in two editions:</p>
+<ul>
+  <li><b>F-Droid / GitHub edition:</b> no ads, no analytics, no tracking. No personal data is collected or sent to anyone.</li>
+  <li><b>Google Play edition:</b> shows ads from Google AdMob, which you can turn off completely in the app's Settings. While ads are on, Google collects some data as described under <a href="#ads">Ads</a>. The developer receives no personal data in either edition.</li>
+</ul>
+<p>Your screen content is never sent to the developer, to Google, or to any internet server in either edition.</p>
 
 <h2>What the app does with your screen</h2>
 <p>When you tap <b>Start sharing</b> and confirm Android's screen-capture prompt, the app captures your screen and serves it as a live video stream from a small web server running <b>on your phone</b>. The stream is only reachable from devices in the same local network (Wi-Fi or your phone's hotspot) that open the address shown in the app.</p>
@@ -32,18 +37,28 @@
   <li>Sharing stops when you tap <b>Stop sharing</b>, use the notification's Stop button, or stop it through Android's screen-sharing indicator.</li>
 </ul>
 
+<h2 id="ads">Ads (Google Play edition only)</h2>
+<p>The Google Play edition shows a small banner at the bottom of the main screen and a full-screen ad before screen sharing starts. Ads are provided by <b>Google AdMob</b>.</p>
+<ul>
+  <li><b>Turning ads off:</b> open Settings (gear icon) and switch off "Show ads". The app then shows no ads and does not start the AdMob SDK. All features keep working.</li>
+  <li><b>Consent:</b> in the European Economic Area, the UK and Switzerland, the app asks for your consent using Google's consent form before personalized ads are shown. You can change your choice any time under Settings → "Ad privacy options".</li>
+  <li><b>What Google may collect while ads are on:</b> device identifiers such as the Android advertising ID, IP address (from which an approximate location can be derived), information about ad interactions, and diagnostic data. Google uses this to show, measure and improve ads and to prevent fraud.</li>
+  <li>Screen captures are never passed to the ad SDK.</li>
+</ul>
+<p>How Google uses this data: <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>. You can reset or delete your advertising ID in Android's settings (Settings → Privacy → Ads).</p>
+
 <h2>Who can see your screen</h2>
 <p>Anyone on the same local network who knows the address can watch while sharing is active. The stream is not password-protected or encrypted. Only share on networks you trust, and avoid showing sensitive information such as passwords or payment details while sharing.</p>
 
 <h2>Permissions</h2>
 <ul>
   <li><b>Screen capture (MediaProjection)</b>: to capture the screen, only after you confirm Android's prompt each time.</li>
-  <li><b>Internet / network state</b>: to run the local web server and show your local network address.</li>
+  <li><b>Internet / network state</b>: to run the local web server and show your local network address. In the Google Play edition also to load ads while they are turned on.</li>
   <li><b>Foreground service / notifications</b>: to keep sharing running in the background and show the ongoing notification with a Stop button.</li>
 </ul>
 
 <h2>Children</h2>
-<p>The app is not directed at children and collects no data from anyone.</p>
+<p>The app is not directed at children. The developer collects no data from anyone.</p>
 
 <h2>Open source</h2>
 <p>The full source code is public: <a href="https://github.com/aiko929/ShareScreenWeb">github.com/aiko929/ShareScreenWeb</a>.</p>

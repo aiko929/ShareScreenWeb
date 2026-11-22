@@ -8,7 +8,7 @@ import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +19,9 @@ class MainActivity : Activity() {
     private lateinit var shareButton: Button
     private lateinit var hintText: TextView
     private lateinit var addressText: TextView
+    private lateinit var adContainer: ViewGroup
+
+    private val ads: AdController = AdsFactory.create()
 
     private val stateListener: () -> Unit = { render() }
 
@@ -26,27 +29,24 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val root = findViewById<View>(R.id.root)
-        val basePadding = root.paddingTop
-        // targetSdk 35+ is edge-to-edge: keep content clear of the system bars.
-        root.setOnApplyWindowInsetsListener { v, insets ->
-            if (Build.VERSION.SDK_INT >= 30) {
-                val bars = insets.getInsets(WindowInsets.Type.systemBars())
-                v.setPadding(basePadding + bars.left, basePadding + bars.top,
-                    basePadding + bars.right, basePadding + bars.bottom)
-            }
-            insets
-        }
+        applySystemBarPadding(findViewById(R.id.root))
 
         toggleButton = findViewById(R.id.toggleButton)
         shareButton = findViewById(R.id.shareButton)
         hintText = findViewById(R.id.hintText)
         addressText = findViewById(R.id.addressText)
+        adContainer = findViewById(R.id.adContainer)
 
         toggleButton.setOnClickListener {
-            if (ShareState.isSharing) stopSharing() else requestCapture()
+            if (ShareState.isSharing) stopSharing()
+            else ads.runAfterInterstitial(this) { requestCapture() }
         }
         shareButton.setOnClickListener { shareAddress() }
+
+        findViewById<View>(R.id.settingsButton).apply {
+            visibility = if (ads.available) View.VISIBLE else View.GONE
+            setOnClickListener { startActivity(Intent(this@MainActivity, SettingsActivity::class.java)) }
+        }
 
         if (Build.VERSION.SDK_INT >= 33 &&
             checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
@@ -59,11 +59,18 @@ class MainActivity : Activity() {
         super.onResume()
         ShareState.addListener(stateListener)
         render()
+        ads.onResume(this, adContainer)
     }
 
     override fun onPause() {
+        ads.onPause()
         ShareState.removeListener(stateListener)
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        ads.destroy()
+        super.onDestroy()
     }
 
     private fun currentUrl(): String? {

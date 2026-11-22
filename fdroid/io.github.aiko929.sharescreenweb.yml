@@ -16,7 +16,7 @@ Builds:
     commit: 782bc892dd59c18d551e30b661b01a6c5339507e
     subdir: app
     gradle:
-      - yes
+      - foss
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
