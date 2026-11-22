@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- monitor -->
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M32,36h44a4,4 0,0 1,4 4v26a4,4 0,0 1,-4 4H32a4,4 0,0 1,-4 -4V40a4,4 0,0 1,4 -4zM34,42v22h40V42z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M48,72h12v4h6v3H42v-3h6z" />
+    <!-- broadcast waves -->
+    <path android:fillColor="#FFFFFFFF" android:pathData="M54,53m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0" />
+</vector>

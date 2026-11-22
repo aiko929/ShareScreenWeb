@@ -1,0 +1,20 @@
+<p>ScreenShare Web mirrors your Android screen to any web browser on the same Wi-Fi network or on your phone's hotspot. Viewers don't need to install anything: they just open the address the app shows.</p>
+
+<p><b>How it works</b></p>
+<ul>
+<li>Tap the big button and confirm Android's built-in screen-capture prompt.</li>
+<li>The app shows an address like <i>http://192.168.1.23:8080</i>.</li>
+<li>Open it in a browser on a laptop, TV, tablet or another phone in the same network.</li>
+<li>Use the Share button to send the address through any app.</li>
+</ul>
+
+<p><b>Features</b></p>
+<ul>
+<li>Uses Android's own screen sharing (MediaProjection), no root needed</li>
+<li>Works in every browser: the stream is plain MJPEG over HTTP</li>
+<li>Keeps running in the background with a notification and a Stop button</li>
+<li>Handles screen rotation</li>
+<li>No accounts, no cloud, no tracking: everything stays in your local network</li>
+</ul>
+
+<p><b>Note:</b> the stream is not password-protected. Anyone on the same network who knows the address can watch, so only share on networks you trust.</p>
