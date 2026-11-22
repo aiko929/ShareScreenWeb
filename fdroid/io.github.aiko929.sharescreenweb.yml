@@ -13,7 +13,7 @@ Repo: https://github.com/aiko929/ShareScreenWeb.git
 Builds:
   - versionName: 1.0.0
     versionCode: 1
-    commit: 994f7cf10f5035e798a9387ccb41961165540d93
+    commit: 60d9382aca5ce9a0034a3f10db3dcc2f1c41120b
     subdir: app
     gradle:
       - foss
