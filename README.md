@@ -8,6 +8,12 @@
   Share your Android screen to any web browser on your local network. One tap, no app needed on the viewer's side.
 </p>
 
+<p align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200" alt="Start screen">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200" alt="Android screen-capture prompt">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="200" alt="Sharing, with address and share button">
+</p>
+
 ---
 
 ## What it does
