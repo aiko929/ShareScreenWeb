@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1024px; height: 500px; overflow: hidden; }
+  body {
+    background: radial-gradient(circle at 78% 50%, #1b2a3a 0%, #101418 62%);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: #e8eaed;
+    position: relative;
+  }
+  .text { position: absolute; left: 72px; top: 0; bottom: 0; width: 470px;
+          display: flex; flex-direction: column; justify-content: center; }
+  h1 { margin: 0 0 18px; font-size: 64px; font-weight: 700; letter-spacing: -1px; line-height: 1.02; }
+  p { margin: 0; font-size: 27px; line-height: 1.35; color: #b6bcc4; }
+  p b { color: #64b5f6; font-weight: 600; }
+
+  /* phone */
+  .phone { position: absolute; left: 560px; top: 58px; width: 180px; height: 384px;
+           border-radius: 28px; background: #0b0e11; border: 6px solid #2a3139;
+           box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+  .btn { position: absolute; left: 30px; top: 92px; width: 120px; height: 120px; border-radius: 50%;
+         background: #1e88e5; display: flex; align-items: center; justify-content: center;
+         font-weight: 700; font-size: 19px; color: #fff; text-align: center; line-height: 1.1; }
+  .url { position: absolute; left: 0; right: 0; top: 250px; text-align: center; font-size: 13px;
+         font-weight: 700; color: #64b5f6; }
+  .share { position: absolute; left: 48px; top: 282px; width: 84px; height: 24px; border-radius: 4px;
+           background: #5a5d61; font-size: 11px; color: #fff; display: flex; align-items: center;
+           justify-content: center; }
+
+  /* waves */
+  .wave { position: absolute; top: 250px; left: 790px; border: 5px solid #64b5f6; border-left: none;
+          border-top-color: transparent; border-bottom-color: transparent; border-radius: 50%; }
+
+  /* laptop */
+  .screen { position: absolute; left: 812px; top: 150px; width: 170px; height: 112px; background: #0b0e11;
+            border: 6px solid #e8eaed; border-radius: 8px; overflow: hidden; }
+  .mini { position: absolute; left: 63px; top: 6px; width: 44px; height: 100px; background: #101418;
+          border-radius: 6px; }
+  .mini::after { content: ""; position: absolute; left: 10px; top: 28px; width: 24px; height: 24px;
+                 border-radius: 50%; background: #1e88e5; }
+  .base { position: absolute; left: 794px; top: 274px; width: 218px; height: 12px; background: #e8eaed;
+          border-radius: 0 0 10px 10px; }
+</style>
+</head>
+<body>
+  <div class="text">
+    <h1>ScreenShare Web</h1>
+    <p>Show your phone screen in <b>any browser</b> on your Wi-Fi. One tap, nothing to install.</p>
+  </div>
+
+  <div class="phone">
+    <div class="btn">Start<br>sharing</div>
+    <div class="url">http://192.168.1.23:8080</div>
+    <div class="share">Share address</div>
+  </div>
+
+  <div class="wave" style="left:750px;top:226px;width:24px;height:48px;opacity:.9"></div>
+  <div class="wave" style="left:744px;top:210px;width:44px;height:80px;opacity:.55"></div>
+
+  <div class="screen"><div class="mini"></div></div>
+  <div class="base"></div>
+</body>
+</html>

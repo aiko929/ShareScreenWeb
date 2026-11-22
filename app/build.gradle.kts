@@ -1,6 +1,15 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+}
+
+// Release signing for Google Play. Only used when keystore.properties exists (it is git-ignored),
+// so F-Droid and other builds from source are unaffected.
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
 }
 
 android {
@@ -15,16 +24,29 @@ android {
         versionName = "1.0.0"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
+    signingConfigs {
+        if (keystoreProps.containsKey("storeFile")) {
+            create("release") {
+                storeFile = file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
         }
     }
 
-    // F-Droid: don't embed the Google-signed dependency metadata blob.
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            signingConfigs.findByName("release")?.let { signingConfig = it }
+        }
+    }
+
+    // F-Droid: don't embed the Google-signed dependency metadata blob in APKs.
+    // App bundles (.aab) only go to Google Play, which uses it.
     dependenciesInfo {
         includeInApk = false
-        includeInBundle = false
+        includeInBundle = true
     }
 
     compileOptions {

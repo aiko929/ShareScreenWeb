@@ -80,6 +80,10 @@ Store metadata (title, descriptions, icon, changelogs) lives in [`fastlane/metad
 
 F-Droid detects new tags automatically and builds the release.
 
+## Google Play
+
+Signing setup, store texts and the answers for every Play Console form are in [`play/README.md`](play/README.md). The privacy policy is published at <https://aiko929.github.io/ShareScreenWeb/privacy-policy.html>.
+
 ## License
 
 [GNU General Public License v3.0 or later](LICENSE)
