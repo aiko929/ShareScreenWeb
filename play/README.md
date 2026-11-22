@@ -111,10 +111,12 @@ The app itself sends nothing to the developer, and the screen stream only goes t
 
 | Data type | Collected | Shared | Optional? | Purposes |
 |---|---|---|---|---|
-| Location → Approximate location (from IP address) | Yes | Yes | Optional (ads can be turned off) | Advertising or marketing, Analytics, Fraud prevention |
-| App activity → Other user-generated content / App interactions | Yes | Yes | Optional | Advertising or marketing, Analytics |
-| App info and performance → Crash logs, Diagnostics | Yes | Yes | Optional | Analytics, Fraud prevention |
-| Device or other IDs (advertising ID, app set ID) | Yes | Yes | Optional | Advertising or marketing, Analytics, Fraud prevention |
+| Location → Approximate location (from IP address) | Yes | Yes | Optional (ads can be turned off) | Analytics, Advertising or marketing, Fraud prevention |
+| App activity → App interactions | Yes | Yes | Optional | Analytics, Advertising or marketing, Fraud prevention |
+| App info and performance → Diagnostics | Yes | Yes | Optional | Analytics, Advertising or marketing, Fraud prevention |
+| Device or other IDs (advertising ID, app set ID) | Yes | Yes | Optional | Analytics, Advertising or marketing, Fraud prevention |
+
+None of these are processed only ephemerally. Accounts: users cannot create an account and cannot sign in with external accounts.
 
 "Optional" is accurate because users can turn off both ad types in Settings, and then the SDK isn't started.
 
