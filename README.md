@@ -33,7 +33,7 @@ Sharing keeps running in the background with a notification that has a **Stop** 
 - No accounts, no cloud. Your screen never leaves your local network.
 - Two editions built from the same code:
   - **FOSS** (F-Droid, GitHub): no ads, no tracking, no third-party libraries, under 1 MB.
-  - **Google Play**: a small banner and a full-screen ad before sharing starts, via Google AdMob. Both can be turned off completely in **Settings**; with ads off, the ad SDK isn't even started.
+  - **Google Play**: a small banner and a full-screen ad before sharing starts (at most once every 5 minutes), via Google AdMob. Each can be turned off separately in **Settings**; with both off, the ad SDK isn't even started.
 
 Requires Android 8.0 (API 26) or newer.
 
@@ -49,7 +49,7 @@ The stream is **not** password-protected or encrypted. Anyone on the same networ
 | Capture service | [`ScreenShareService.kt`](app/src/main/java/com/sharescreenweb/ScreenShareService.kt) | Foreground service: MediaProjection → `ImageReader` → JPEG (about 15 fps, max 1280 px) |
 | Web server | [`MjpegServer.kt`](app/src/main/java/com/sharescreenweb/MjpegServer.kt) | Tiny HTTP server: viewer page at `/`, MJPEG stream at `/stream`, single frame at `/frame.jpg` |
 | Network | [`NetworkUtils.kt`](app/src/main/java/com/sharescreenweb/NetworkUtils.kt) | Finds the device's Wi-Fi or hotspot IPv4 address |
-| Settings | [`SettingsActivity.kt`](app/src/main/java/com/sharescreenweb/SettingsActivity.kt) | "Show ads" switch and ad privacy options (Play edition only) |
+| Settings | [`SettingsActivity.kt`](app/src/main/java/com/sharescreenweb/SettingsActivity.kt) | Separate switches for the banner and the full-screen ad, plus ad privacy options (Play edition only) |
 | Ads | [`AdController.kt`](app/src/main/java/com/sharescreenweb/AdController.kt) | Ad interface; [`foss`](app/src/foss/java/com/sharescreenweb/AdsFactory.kt) is a no-op, [`play`](app/src/play/java/com/sharescreenweb/AdsFactory.kt) uses AdMob with GDPR consent (UMP) |
 
 The server listens on port 8080. If that port is taken, it uses the next free port up to 8099.

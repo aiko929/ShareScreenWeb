@@ -28,15 +28,24 @@ interface AdController {
     fun showPrivacyOptions(activity: Activity)
 }
 
-/** User preference for showing ads. */
+/** User preferences for the two ad types; each can be turned off on its own. */
 object AdPrefs {
     private const val FILE = "settings"
-    private const val KEY_ADS = "ads_enabled"
+    private const val KEY_BANNER = "banner_ads_enabled"
+    private const val KEY_INTERSTITIAL = "interstitial_ads_enabled"
 
-    fun isEnabled(context: Context): Boolean =
-        context.getSharedPreferences(FILE, Context.MODE_PRIVATE).getBoolean(KEY_ADS, true)
+    fun isBannerEnabled(context: Context): Boolean = prefs(context).getBoolean(KEY_BANNER, true)
 
-    fun setEnabled(context: Context, enabled: Boolean) {
-        context.getSharedPreferences(FILE, Context.MODE_PRIVATE).edit().putBoolean(KEY_ADS, enabled).apply()
-    }
+    fun setBannerEnabled(context: Context, enabled: Boolean) =
+        prefs(context).edit().putBoolean(KEY_BANNER, enabled).apply()
+
+    fun isInterstitialEnabled(context: Context): Boolean = prefs(context).getBoolean(KEY_INTERSTITIAL, true)
+
+    fun setInterstitialEnabled(context: Context, enabled: Boolean) =
+        prefs(context).edit().putBoolean(KEY_INTERSTITIAL, enabled).apply()
+
+    /** True if at least one ad type is on; only then is the ad SDK started. */
+    fun anyEnabled(context: Context): Boolean = isBannerEnabled(context) || isInterstitialEnabled(context)
+
+    private fun prefs(context: Context) = context.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 }

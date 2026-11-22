@@ -16,11 +16,19 @@ class SettingsActivity : Activity() {
         setContentView(R.layout.activity_settings)
         applySystemBarPadding(findViewById(R.id.root))
 
-        val adsSwitch = findViewById<Switch>(R.id.adsSwitch)
-        adsSwitch.isChecked = AdPrefs.isEnabled(this)
-        adsSwitch.setOnCheckedChangeListener { _, checked ->
-            AdPrefs.setEnabled(this, checked)
-            renderPrivacyButton()
+        findViewById<Switch>(R.id.bannerSwitch).apply {
+            isChecked = AdPrefs.isBannerEnabled(this@SettingsActivity)
+            setOnCheckedChangeListener { _, checked ->
+                AdPrefs.setBannerEnabled(this@SettingsActivity, checked)
+                renderPrivacyButton()
+            }
+        }
+        findViewById<Switch>(R.id.interstitialSwitch).apply {
+            isChecked = AdPrefs.isInterstitialEnabled(this@SettingsActivity)
+            setOnCheckedChangeListener { _, checked ->
+                AdPrefs.setInterstitialEnabled(this@SettingsActivity, checked)
+                renderPrivacyButton()
+            }
         }
 
         privacyButton = findViewById(R.id.privacyButton)
@@ -33,7 +41,7 @@ class SettingsActivity : Activity() {
     }
 
     private fun renderPrivacyButton() {
-        val show = AdPrefs.isEnabled(this) && ads.isPrivacyOptionsRequired(this)
+        val show = AdPrefs.anyEnabled(this) && ads.isPrivacyOptionsRequired(this)
         privacyButton.visibility = if (show) View.VISIBLE else View.GONE
     }
 }

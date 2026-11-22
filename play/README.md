@@ -27,7 +27,7 @@ When creating the app in Play Console, keep **Play App Signing** enabled (the de
 
 ## Ads (AdMob)
 
-The `play` flavor shows a bottom banner on the main screen and a full-screen (interstitial) ad when the user taps Start sharing. Users can turn both off in Settings. In the EU/UK/CH, Google's consent form (UMP) appears before ads load.
+The `play` flavor shows a bottom banner on the main screen and a full-screen (interstitial) ad when the user taps Start sharing, at most once every 5 minutes (also across app restarts). Users can turn off each one separately in Settings. In the EU/UK/CH, Google's consent form (UMP) appears before ads load.
 
 Until real IDs are set, the app uses **Google's official test ads**. Debug builds always use test ads, so you can't accidentally click your own ads (that gets AdMob accounts banned).
 
@@ -72,7 +72,7 @@ FEATURES
 • Keeps running in the background with a notification and a Stop button
 • Handles screen rotation
 • No accounts, no cloud: your screen never leaves your local network
-• Contains ads, which you can turn off completely in Settings
+• Contains ads; the banner and the full-screen ad can each be turned off in Settings
 • Open source (GPL-3.0): github.com/aiko929/ShareScreenWeb
 
 NOTE
@@ -116,7 +116,7 @@ The app itself sends nothing to the developer, and the screen stream only goes t
 | App info and performance → Crash logs, Diagnostics | Yes | Yes | Optional | Analytics, Fraud prevention |
 | Device or other IDs (advertising ID, app set ID) | Yes | Yes | Optional | Advertising or marketing, Analytics, Fraud prevention |
 
-"Optional" is accurate because users can turn ads off in Settings, and then the SDK isn't started.
+"Optional" is accurate because users can turn off both ad types in Settings, and then the SDK isn't started.
 
 ### Foreground service declaration (FOREGROUND_SERVICE_MEDIA_PROJECTION)
 
